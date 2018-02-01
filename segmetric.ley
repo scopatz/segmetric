@@ -9,7 +9,7 @@ Further categorize the population into $G$ distinct groups.
 These groups can represent race, political affiliation, etc.
 Denote each group with $g$.  Call $P(r, g)$ the number of people in the
 r{^th^} region who are categorized into the g{^th^} group. Let's turn this into
-a probablity distrubution by dividing by the total population size,
+a probability distribution by dividing by the total population size,
 $$$
 p(r, g) = \frac{P(r,g)}{P}
 $$$
@@ -55,10 +55,10 @@ $$$
 This version of segregation has the following properties:
 0. Normalized: $0 \le S \le 1$
 0. When $S = 0$ the area is completely __desegregated__. Each region has the
-   same group distibution as every other region. Knowing someone's group
+   same group distribution as every other region. Knowing someone's group
    doesn't tell you anything about their region (or vice-versa).
 0. When $S = 1$ the area is completely __segregated__. Regions are as
-   homogenous as they can possibly be. Knowing someone's group wil tell you
+   homogeneous as they can possibly be. Knowing someone's group will tell you
    exactly their region, and vice-versa!
 0. Values of $S$ between 0 and 1 represent the degree of segregation, with
    higher values indicating higher segregation.
@@ -66,8 +66,8 @@ This version of segregation has the following properties:
 
 **Gerrymandering**
 
-Lacking natrual boundaries (rivers, moutains, neighborhoods, congressional districts),
-the segregation metric does depend on how the region boundaies are drawn. $S$ also
+Lacking natural boundaries (rivers, mountains, neighborhoods, congressional districts),
+the segregation metric does depend on how the region boundaries are drawn. $S$ also
 may depend on how many regions the area is chopped up in to. However, this dependence
 should be weak in any ~~fair~~ region selection. That said, here are a couple of tools
 to prevent gerrymandering.
@@ -77,7 +77,7 @@ How many people this counts for enough is depends on the size of $P$ and the
 group distribution $p(g)$. As a rule of thumb, try to enforce the constraint that
 each region contains at least 100-1000 people.
 
-Secondly, we can average over region boundary dependence.  Choose random, contigous
+Secondly, we can average over region boundary dependence.  Choose random, contiguous
 boundaries $R^n$ and measure $S(R^n;G)$. Repeat this process for as many samplings
 as desired ($N$). Take the mean $S(\bar{R};G)$ such that,
 $$$
