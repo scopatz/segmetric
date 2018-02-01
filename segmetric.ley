@@ -13,7 +13,7 @@ a probablity distrubution by dividing by the total population size,
 $$$
 p(r, g) = \frac{P(r,g)}{P}
 $$$
-Note that we can back out the probability distribution by region $p(r)$ and by
+We can back out the probability distribution by region $p(r)$ and by
 group $p(g)$ by taking a sum over the other variable. Namely,
 $$$
 p(r) = \sum_g^G p(r, g)
@@ -21,17 +21,70 @@ $$$
 $$$
 p(g) = \sum_r^R p(r, g)
 $$$
+Note that:
+* Regions may have different numbers of people,
+* Regions do need to have the same geographic area,
+* There can be as many groups as desired, as long as there are ~~at least 2~~.
 
 Segregation can be thought of in terms of how much knowing someone's region
 will determine their group (race, party, etc.) and how much someone's group
 will determine their region. To start, consider the **Mutual Information**,
 which is defined as:
 $$$
-I(R;G) = \sum_g^G \sum_r^R p(r,g) \ln\left[\frac{p(r,g)}{p(r)p(g)}\right]
+I(R;G) = \sum_g^G \sum_r^R p(r,g) \log_2\left[\frac{p(r,g)}{p(r)p(g)}\right]
 $$$
+The mutual information has the properties:
+0. Non-negative: $0 \le I(R;G)$
+0. $I(R;G) = 0$ occurs when region and group are completely independent
+   (i.e. have nothing to do with each other).
+0. The maximum value of $I(R; G)$ occurs when knowing what region will
+   tell you exactly what group someone falls in, and vice-versa.
+Unfortunately, $I(R;G)$ is measured in the somewhat awkward units of
+~~bits~~ of information.
 
-**Gery
+For a segregation metric, let's normalize the mutual information by
+the **Joint Entropy** $H(R, G)$. At its maximal value, the mutual information
+is equal to the joint entropy.
+$$$
+H(R, G) = - \sum_g^G \sum_r^R p(r,g) \log_2\left[p(r,g)\right]
+$$$
+Thus, we can call the segregation $S(R,G)$,
+$$$
+S(R,G) = \frac{I(R;G)}{H(R,G)}
+$$$
+This version of segregation has the following properties:
+0. Normalized: $0 \le S \le 1$
+0. When $S = 0$ the area is completely __desegregated__. Each region has the
+   same group distibution as every other region. Knowing someone's group
+   doesn't tell you anything about their region (or vice-versa).
+0. When $S = 1$ the area is completely __segregated__. Regions are as
+   homogenous as they can possibly be. Knowing someone's group wil tell you
+   exactly their region, and vice-versa!
+0. Values of $S$ between 0 and 1 represent the degree of segregation, with
+   higher values indicating higher segregation.
 
-as long as each sub-region has
-~~enough~~ people. How many enough is depends on the size of $P$, but you should
-probably aim for each sub region
+
+**Gerrymandering**
+
+Lacking natrual boundaries (rivers, moutains, neighborhoods, congressional districts),
+the segregation metric does depend on how the region boundaies are drawn. $S$ also
+may depend on how many regions the area is chopped up in to. However, this dependence
+should be weak in any ~~fair~~ region selection. That said, here are a couple of tools
+to prevent gerrymandering.
+
+First, require that each region has ~~enough~~ people.
+How many people this counts for enough is depends on the size of $P$ and the
+group distribution $p(g)$. As a rule of thumb, try to enforce the constraint that
+each region contains at least 100-1000 people.
+
+Secondly, we can average over region boundary dependence.  Choose random, contigous
+boundaries $R^n$ and measure $S(R^n;G)$. Repeat this process for as many samplings
+as desired ($N$). Take the mean $S(\bar{R};G)$ such that,
+$$$
+S(\bar{R};G) = \frac{1}{N} \sum_n^N S(R^n;G)
+$$$
+For sufficiently high values of $N$, $S(\bar{R};G)$ should start to converge.
+Use $S(\bar{R};G)$ as the segregation metric.
+
+
+
