@@ -48,7 +48,7 @@ is equal to the joint entropy.
 $$$
 H(R, G) = - \sum_g^G \sum_r^R p(r,g) \log_2\left[p(r,g)\right]
 $$$
-Thus, we can call the segregation $S(R,G)$,
+Thus, we can call the **Segregation** $S(R,G)$,
 $$$
 S(R,G) = \frac{I(R;G)}{H(R,G)}
 $$$
@@ -73,7 +73,7 @@ should be weak in any ~~fair~~ region selection. That said, here are a couple of
 to prevent gerrymandering.
 
 First, require that each region has ~~enough~~ people.
-How many people this counts for enough is depends on the size of $P$ and the
+How many people this counts for depends on the size of $P$ and the
 group distribution $p(g)$. As a rule of thumb, try to enforce the constraint that
 each region contains at least 100-1000 people.
 
