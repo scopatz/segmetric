@@ -1,0 +1,37 @@
+with meta::
+    title = "Notes on an Information Theoretic Segregation Metric"
+    author = 'Anthony Scopatz'
+
+Consider a population $P$ in an area. The population is distributed throughout the
+area, which we'll chop up into $R$ regions. Denote the regions by $r$, and feel
+free to draw any non-overlapping boundaries you wish.
+Further categorize the population into $G$ distinct groups.
+These groups can represent race, political affiliation, etc.
+Denote each group with $g$.  Call $P(r, g)$ the number of people in the
+r{^th^} region who are categorized into the g{^th^} group. Let's turn this into
+a probablity distrubution by dividing by the total population size,
+$$$
+p(r, g) = \frac{P(r,g)}{P}
+$$$
+Note that we can back out the probability distribution by region $p(r)$ and by
+group $p(g)$ by taking a sum over the other variable. Namely,
+$$$
+p(r) = \sum_g^G p(r, g)
+$$$
+$$$
+p(g) = \sum_r^R p(r, g)
+$$$
+
+Segregation can be thought of in terms of how much knowing someone's region
+will determine their group (race, party, etc.) and how much someone's group
+will determine their region. To start, consider the **Mutual Information**,
+which is defined as:
+$$$
+I(R;G) = \sum_g^G \sum_r^R p(r,g) \ln\left[\frac{p(r,g)}{p(r)p(g)}\right]
+$$$
+
+**Gery
+
+as long as each sub-region has
+~~enough~~ people. How many enough is depends on the size of $P$, but you should
+probably aim for each sub region
